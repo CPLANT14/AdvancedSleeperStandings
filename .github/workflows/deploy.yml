@@ -17,8 +17,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install --legacy-peer-deps  # Fixes dependency version conflicts
-      - run: CI=false npm run build         # Ignores warnings that stop the build
+          # We removed the 'cache' line here to prevent the lockfile error
+      - run: npm install --no-package-lock
+      - run: CI=false npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
